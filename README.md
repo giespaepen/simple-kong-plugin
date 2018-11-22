@@ -25,5 +25,5 @@ luarocks pack <your-plugin-name>
 ```bash
 make install
 luarocks pack <your-plugin-name>
-dc up --force-recreate
+docker-compose up --force-recreate
 ```
