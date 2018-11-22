@@ -5,11 +5,15 @@
 local BasePlugin = require "kong.plugins.base_plugin"
 local CustomHandler = BasePlugin:extend()
 
+-- See https://docs.konghq.com/0.14.x/plugin-development/custom-logic/#plugins-execution-order
+-- The higher priority goes earlier (ex: prio 1000 runs before prio 800)
+CustomHandler.PRIORITY = 1000
+
 -- Your plugin handler's constructor. If you are extending the
 -- Base Plugin handler, it's only role is to instantiate itself
 -- with a name. The name is your plugin name as it will be printed in the logs.
 function CustomHandler:new()
-  CustomHandler.super.new(self, "my-custom-plugin")
+  CustomHandler.super.new(self, "simple-kong-plugin")
 end
 
 function CustomHandler:init_worker()
@@ -18,6 +22,7 @@ function CustomHandler:init_worker()
   CustomHandler.super.init_worker(self)
 
   -- Implement any custom logic here
+
 end
 
 function CustomHandler:certificate(config)
